@@ -17,7 +17,7 @@
           <v-list-item
               v-for="subKey in Object.keys(profile['content']['connection'])"
               :key="subKey"
-              :title="profileParamsKeyMap[subKey]"
+              :title="ProfileParamsKeyMap[subKey]"
               :subtitle="`${subKey} - ${profile['content']['connection'][subKey]}`"
               :value="subKey"
           ></v-list-item>
@@ -37,7 +37,7 @@
           <v-list-item
               v-for="subKey in Object.keys(profile['content']['instance_options'])"
               :key="subKey"
-              :title="profileParamsKeyMap[subKey]"
+              :title="ProfileParamsKeyMap[subKey]"
               :subtitle="`${subKey} - ${profile['content']['instance_options'][subKey]}`"
               :value="subKey"
           ></v-list-item>
@@ -83,7 +83,7 @@
 </template>
 <script setup lang="ts">
 
-import {profileParamsKeyMap} from "@/utils/tasks.ts";
+import {ProfileParamsKeyMap} from "@/utils/tasks.ts";
 import {RecordModel} from "pocketbase";
 import {toast} from "@/toast";
 import {ref} from "vue";

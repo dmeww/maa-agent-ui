@@ -24,11 +24,11 @@
 </template>
 <script setup lang="ts">
 
-import {Item} from "@/utils/types.ts";
+import {TaskItem} from "@/utils/types.ts";
 import ParamDetail from "@/views/maa/autoclick/components/ParamDetail.vue";
-import {ref, watch} from "vue";
 
-const emits = defineEmits(['update:checked'])
+
+
 defineProps({
   value: {
     type: String,
@@ -37,16 +37,8 @@ defineProps({
 })
 
 
-const task = defineModel<Item>({required: true})
+const task = defineModel<TaskItem>({required: true})
 
-const last = ref<boolean>(false)
-watch(task.value, () => {
-  if (!(task.value.checked === last.value)){
-    console.log('emit checked',task.value.checked)
-    last.value = task.value.checked
-    emits('update:checked',task.value.checked)
-  }
-})
 
 
 </script>

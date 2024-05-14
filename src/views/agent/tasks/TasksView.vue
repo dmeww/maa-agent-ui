@@ -17,7 +17,7 @@
             <v-chip v-for="sub in task['content']['tasks']" :key="sub['type']"
                     color="green"
                     class="mx-1 my-1 cursor-pointer w-auto">
-              {{ taskMap[sub['type']] }}
+              {{ TaskParamKeyMap[sub['type']] }}
               <div >
                 {{ sub['params'] }}
               </div>
@@ -177,7 +177,7 @@
 import {usePocketBase} from "@/pocketbase";
 import {Ref, ref} from "vue";
 import {RecordModel} from "pocketbase";
-import {taskMap} from '@/utils/tasks'
+import {TaskParamKeyMap} from '@/utils/tasks'
 import {toast} from "@/toast";
 import {VTimePicker} from "vuetify/labs/components";
 

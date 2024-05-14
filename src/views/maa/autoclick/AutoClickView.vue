@@ -3,7 +3,7 @@
     <div class=" pb-5"
          :style="{width: $vuetify.display.mobile?`${$vuetify.display.width>900?844:($vuetify.display.width -56)}px`:'100%',maxWidth:'900px'}">
 
-      <v-sheet class="mb-2" >
+      <v-sheet class="mb-2">
         已选任务
         <v-chip-group>
           <v-chip
@@ -38,7 +38,6 @@
               v-for="(task,index) in tasks"
               :key="task.key"
               v-model="tasks[index]"
-              @update:checked="(checked:boolean) => checkTask(checked,index,task.key)"
               :value="task.key"/>
 
         </v-tabs-window>
@@ -96,9 +95,9 @@
 </template>
 <script lang="ts" setup>
 
-import {reactive, Ref, ref} from "vue";
-import {Item, Task, TaskParam} from "@/utils/types.ts";
-import {taskList} from "@/utils/tasks.ts";
+import {computed, ComputedRef, reactive, ref} from "vue";
+import {TaskItem, Task, TaskParam} from "@/utils/types.ts";
+import {SampleTaskList} from "@/utils/tasks.ts";
 import TaskDetail from "@/views/maa/autoclick/components/TaskDetail.vue";
 import {usePocketBase} from "@/pocketbase";
 import PocketBase from "pocketbase";
@@ -107,17 +106,13 @@ import {toast} from "@/toast";
 const tab = ref('')
 const loading = ref(false)
 const pocketbase = usePocketBase() as PocketBase
-const tasks: Item[] = reactive(taskList)
-const checkedTasks: Ref<Item[]> = ref([])
+const tasks: TaskItem[] = reactive(SampleTaskList)
 const taskName = ref('')
 
-const checkTask = (checked: boolean, index: number, key: string) => {
-  if (checked) {
-    checkedTasks.value.push(tasks[index])
-  } else {
-    checkedTasks.value = checkedTasks.value.filter(task => task.key !== key)
-  }
-}
+const checkedTasks: ComputedRef<TaskItem[]> = computed(() => {
+  return tasks.filter(task => task.checked)
+})
+
 
 const submitTask = async () => {
   loading.value = true
@@ -128,8 +123,16 @@ const submitTask = async () => {
           tasks: checkedTasks.value.map(task => new class implements Task {
             type = task.key
             params = task.params.reduce((obj: TaskParam, param) => {
-              if (param.value !== param.default)
-                obj[param.key] = param.value;
+              // 类型不能错，否则任务会按默认值走
+              if (param.value !== param.default) {
+                if (param.type === 'number') {
+                  obj[param.key] = Number(param.value)
+                } else if (param.type === "boolean") {
+                  obj[param.key] = Boolean(param.value)
+                } else {
+                  obj[param.key] = param.value;
+                }
+              }
               return obj;
             }, {})
           })

@@ -4,7 +4,7 @@ import {
     Depot,
     Fight,
     Infrast,
-    Item,
+    TaskItem,
     Mall,
     OperBox,
     ReclamationAlgorithm,
@@ -15,12 +15,12 @@ import {
 } from "@/utils/types.ts";
 
 
-export const taskList: Item[] = [
+export const SampleTaskList: TaskItem[] = [
     new StartUp(),
     new Recruit(),
-    new Fight(),
     new Infrast(),
     new Mall(),
+    new Fight(),
     new Award(),
     new CloseDown(),
     new Roguelike(),
@@ -29,7 +29,7 @@ export const taskList: Item[] = [
     new OperBox()
 ]
 
-export const taskMap: TaskParam = {
+export const TaskParamKeyMap: TaskParam = {
     "StartUp": "启动游戏",
     "Recruit": "公开招募",
     "Fight": "刷理智",
@@ -44,8 +44,7 @@ export const taskMap: TaskParam = {
     "OperBox": "干员Box识别",
 }
 
-export const profileParamsKeyMap: TaskParam = {
-
+export const ProfileParamsKeyMap: TaskParam = {
     'adb_path': 'adb可执行文件的路径',
     'address': '连接地址',
     'config': '连接配置',

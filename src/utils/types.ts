@@ -7,14 +7,14 @@ export interface TaskParam {
     [key: string]: any
 }
 
-export interface Item {
+export interface TaskItem {
     checked: boolean,
     label: string,
     key: string,
-    params: Param[]
+    params: TaskItemParam[]
 }
 
-export interface Param {
+export interface TaskItemParam {
     type: 'string' | 'number' | 'boolean' | 'select' | 'list',
     label: string,
     key: string,
@@ -28,7 +28,7 @@ export interface SelectItem {
     value: any
 }
 
-export class StartUp implements Item {
+export class StartUp implements TaskItem {
     checked: boolean;
     key: string;
     label: string;
@@ -86,11 +86,11 @@ export class StartUp implements Item {
                 value: '',
                 default: ''
             }
-        ] as Param[]
+        ] as TaskItemParam[]
     }
 }
 
-export class CloseDown implements Item {
+export class CloseDown implements TaskItem {
 
     checked: boolean;
     key: string;
@@ -101,12 +101,12 @@ export class CloseDown implements Item {
         this.key = 'CloseDown'
         this.label = '关闭游戏'
         this.checked = false
-        this.params = [] as Param[]
+        this.params = [] as TaskItemParam[]
     }
 
 }
 
-export class Fight implements Item {
+export class Fight implements TaskItem {
     checked: boolean;
     key: string;
     label: string;
@@ -149,14 +149,14 @@ export class Fight implements Item {
                 type: 'number',
                 label: '指定次数',
                 key: 'times',
-                default: 999,
-                value: 999
+                default: 0,
+                value: 0
             },
-        ] as Param[]
+        ] as TaskItemParam[]
     }
 }
 
-export class Recruit implements Item {
+export class Recruit implements TaskItem {
 
     checked: boolean;
     key: string;
@@ -196,11 +196,11 @@ export class Recruit implements Item {
                 value: 4,
                 default: 0
             }
-        ] as Param[]
+        ] as TaskItemParam[]
     }
 }
 
-export class Infrast implements Item {
+export class Infrast implements TaskItem {
     checked: boolean;
     key: string;
     label: string;
@@ -270,11 +270,11 @@ export class Infrast implements Item {
                 value: 0.3,
                 default: 0
             }
-        ] as Param[]
+        ] as TaskItemParam[]
     }
 }
 
-export class Mall implements Item {
+export class Mall implements TaskItem {
     checked: boolean;
     key: string;
     label: string;
@@ -292,12 +292,12 @@ export class Mall implements Item {
                 value: false,
                 default: false
             }
-        ] as Param[]
+        ] as TaskItemParam[]
     }
 
 }
 
-export class Award implements Item {
+export class Award implements TaskItem {
     checked: boolean;
     key: string;
     label: string;
@@ -322,11 +322,11 @@ export class Award implements Item {
                 value: false,
                 default: false
             }
-        ] as Param[]
+        ] as TaskItemParam[]
     }
 }
 
-export class Roguelike implements Item {
+export class Roguelike implements TaskItem {
 
     checked: boolean;
     key: string;
@@ -424,12 +424,12 @@ export class Roguelike implements Item {
                 default: false
             }
 
-        ] as Param[]
+        ] as TaskItemParam[]
     }
 
 }
 
-export class ReclamationAlgorithm implements Item {
+export class ReclamationAlgorithm implements TaskItem {
 
     checked: boolean;
     key: string;
@@ -440,11 +440,11 @@ export class ReclamationAlgorithm implements Item {
         this.key = 'ReclamationAlgorithm'
         this.label = '生息演算'
         this.checked = false
-        this.params = [] as Param[]
+        this.params = [] as TaskItemParam[]
     }
 }
 
-export class Depot implements Item {
+export class Depot implements TaskItem {
 
 
     checked: boolean;
@@ -456,12 +456,12 @@ export class Depot implements Item {
         this.key = 'Depot'
         this.label = '仓库识别'
         this.checked = false
-        this.params = [] as Param[]
+        this.params = [] as TaskItemParam[]
     }
 
 }
 
-export class OperBox implements Item {
+export class OperBox implements TaskItem {
 
 
     checked: boolean;
@@ -473,12 +473,12 @@ export class OperBox implements Item {
         this.key = 'OperBox'
         this.label = '干员 box 识别'
         this.checked = false
-        this.params = [] as Param[]
+        this.params = [] as TaskItemParam[]
     }
 
 }
 
-export class Copilot implements Item {
+export class Copilot implements TaskItem {
     checked: boolean;
     key: string;
     label: string;
@@ -503,7 +503,7 @@ export class Copilot implements Item {
                 value: false,
                 default: false
             }
-        ] as Param[]
+        ] as TaskItemParam[]
     }
 }
 
@@ -514,11 +514,11 @@ export interface Profile {
 
 export interface ConnectionProfile {
 
-    params: Param[]
+    params: TaskItemParam[]
 }
 
 export interface InstanceOptionProfile {
-    params: Param[]
+    params: TaskItemParam[]
 }
 
 export class Profiles implements Profile {
@@ -527,7 +527,7 @@ export class Profiles implements Profile {
 
     constructor() {
         this.connection = new class implements ConnectionProfile {
-            params: Param[];
+            params: TaskItemParam[];
 
             constructor() {
                 this.params = [
@@ -552,11 +552,11 @@ export class Profiles implements Profile {
                         value: 'General',
                         default: '_'
                     },
-                ] as Param[]
+                ] as TaskItemParam[]
             }
         }
         this.instance_options = new class implements InstanceOptionProfile {
-            params: Param[];
+            params: TaskItemParam[];
 
             constructor() {
                 this.params = [
@@ -606,7 +606,7 @@ export class Profiles implements Profile {
                         value: false,
                         default: null
                     }
-                ] as Param[]
+                ] as TaskItemParam[]
             }
         }
     }

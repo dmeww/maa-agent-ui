@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {Param} from "@/utils/types.ts";
+import {TaskItemParam} from "@/utils/types.ts";
 
 defineProps({
   param: {
-    type: Object as () => Param,
+    type: Object as () => TaskItemParam,
     required: true
   }
 })
