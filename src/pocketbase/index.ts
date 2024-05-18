@@ -39,5 +39,6 @@ export async function logout() {
     pocketbase.authStore.clear()
     localStorage.removeItem('pb_url')
     toast.success('退出登录')
-    router.push('/login')
+    // router.push('/login').catch(err => console.log(err))
+    location.replace('/login')
 }

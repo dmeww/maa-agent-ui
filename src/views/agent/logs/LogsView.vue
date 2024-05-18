@@ -63,12 +63,7 @@
         </v-card-actions>
       </v-card>
 
-      <v-sheet v-if="histories.length ===0" style="font-size: 16px" class="d-flex align-center justify-center">
-        <v-icon :size="32" class="pr-2">
-          mdi-alert-circle-outline
-        </v-icon>
-        任务日志记录为空
-      </v-sheet>
+    <empty-info-card v-if="histories.length ===0" content="任务日志记录为空" />
 
     </div>
 
@@ -79,6 +74,7 @@ import {usePocketBase} from "@/pocketbase";
 import {Ref, ref} from "vue";
 import {RecordModel} from "pocketbase";
 import {toast} from "@/toast";
+import EmptyInfoCard from "@/components/EmptyInfoCard.vue";
 
 
 const pocketbase = usePocketBase()

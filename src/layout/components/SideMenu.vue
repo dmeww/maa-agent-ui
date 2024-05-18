@@ -1,19 +1,56 @@
 <template>
   <v-navigation-drawer
       v-model="drawer"
-      color="grey-lighten-4"
       border
-      temporary >
-    <v-list >
-      <v-list-subheader>MAA</v-list-subheader>
-      <v-list-item rounded="xl" prepend-icon="mdi-google-assistant" title="任务配置" @click="go('/')"></v-list-item>
-<!--      <v-list-item rounded="xl" prepend-icon="mdi-motion-play-outline" title="自动抄作业" @click="go('/copilot')"></v-list-item>-->
-      <v-list-subheader>Agent</v-list-subheader>
-      <v-list-item rounded="xl" prepend-icon="mdi-piggy-bank" title="任务仓库" @click="go('/tasks')"></v-list-item>
-      <v-list-item rounded="xl" prepend-icon="mdi-view-list-outline" title="执行队列" @click="go('/queue')"></v-list-item>
-      <v-list-item rounded="xl" prepend-icon="mdi-math-log" title="任务日志" @click="go('/logs')"></v-list-item>
-      <v-list-item rounded="xl" prepend-icon="mdi-timer-cog-outline" title="定时任务" @click="go('/cron')"></v-list-item>
-      <v-list-item rounded="xl" prepend-icon="mdi-database-settings-outline" title="MAA配置" @click="go('/profiles')"></v-list-item>
+      temporary>
+    <v-list border>
+      <v-list-subheader color="primary">MAA</v-list-subheader>
+      <v-list-item rounded="xl" title="任务配置" @click="go('/')">
+        <template v-slot:prepend>
+          <v-icon color="primary">
+            mdi-google-assistant
+          </v-icon>
+        </template>
+      </v-list-item>
+      <v-list-subheader color="primary">Agent</v-list-subheader>
+      <v-list-item rounded="xl" title="任务仓库" @click="go('/tasks')">
+        <template v-slot:prepend>
+          <v-icon color="primary">
+            mdi-piggy-bank
+          </v-icon>
+        </template>
+      </v-list-item>
+      <v-list-item rounded="xl" title="执行队列"
+                   @click="go('/queue')">
+        <template v-slot:prepend>
+          <v-icon color="primary">
+            mdi-view-list-outline
+          </v-icon>
+        </template>
+      </v-list-item>
+      <v-list-item rounded="xl" title="任务日志" @click="go('/logs')">
+        <template v-slot:prepend>
+          <v-icon color="primary">
+            mdi-math-log
+          </v-icon>
+        </template>
+      </v-list-item>
+      <v-list-item rounded="xl" title="定时任务"
+                   @click="go('/cron')">
+        <template v-slot:prepend>
+          <v-icon color="primary">
+            mdi-timer-cog-outline
+          </v-icon>
+        </template>
+      </v-list-item>
+      <v-list-item rounded="xl" prepend-icon="" title="MAA配置"
+                   @click="go('/profiles')">
+        <template v-slot:prepend>
+          <v-icon color="primary">
+            mdi-database-settings-outline
+          </v-icon>
+        </template>
+      </v-list-item>
 
     </v-list>
   </v-navigation-drawer>

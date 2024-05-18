@@ -149,8 +149,8 @@ export class Fight implements TaskItem {
                 type: 'number',
                 label: '指定次数',
                 key: 'times',
-                default: 0,
-                value: 0
+                default: 9999,
+                value: 9999
             },
         ] as TaskItemParam[]
     }

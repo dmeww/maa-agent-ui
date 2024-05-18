@@ -11,14 +11,9 @@
           @update="loadProfiles"/>
 
 
-      <v-sheet v-if="profiles.length ===0" style="font-size: 16px" class="d-flex align-center justify-center">
-        <v-icon :size="32" class="pr-2">
-          mdi-alert-circle-outline
-        </v-icon>
-        MAA预设为空
-      </v-sheet>
+      <empty-info-card v-if="profiles.length === 0" content="MAA预设为空"/>
 
-      <dialog-create-profile @update="loadProfiles" />
+      <dialog-create-profile @update="loadProfiles"/>
 
     </div>
   </v-card>
@@ -30,6 +25,7 @@ import {RecordModel} from "pocketbase";
 
 import ProfileCard from "@/views/agent/profiles/components/ProfileCard.vue";
 import DialogCreateProfile from "@/views/agent/profiles/components/DialogCreateProfile.vue";
+import EmptyInfoCard from "@/components/EmptyInfoCard.vue";
 
 const pocketbase = usePocketBase()
 

@@ -5,35 +5,29 @@
     <div class=" pb-5"
          :style="{width: $vuetify.display.mobile?`${$vuetify.display.width>900?844:($vuetify.display.width -56)}px`:'100%',maxWidth:'900px'}">
 
-      <v-sheet class="overflow-x-auto overflow-hidden mb-2">
+      <v-card-text class="overflow-x-auto mb-2">
         <v-chip
             variant="flat"
-            class="ma-1"
+            class="ma-1 pa-3"
+            rounded
             :color="index===0?'green':'primary'"
             v-for="(exec,index) in execList"
             :key="exec.id">
           {{ exec['taskname'] || exec['taskid'] }}
         </v-chip>
-      </v-sheet>
-
-      <v-card-text v-if="execList.length > 0" class="pa-3 rounded-lg bg-surface-variant">
-        <v-sheet style="font-size: 16px" color="surface-variant">
-          运行日志
-        </v-sheet>
-        <v-divider class="mt-3 pb-3"/>
-        <v-sheet v-for="log in logs" :key="log.id" class="px-2" color="surface-variant">
-          {{ log['content'] }}
-        </v-sheet>
       </v-card-text>
-      <v-sheet v-else style="font-size: 16px" class="d-flex align-center justify-center">
-        <v-icon :size="32" class="pr-2">
-          mdi-alert-circle-outline
-        </v-icon>
-        当前没有正在运行的任务
-      </v-sheet>
 
+      <v-card v-if="execList.length > 0" title="运行日志" variant="outlined">
+        <v-card-text >
+          <v-divider class="mt-3 pb-3"/>
+
+          <v-textarea :model-value="logString" class="px-2" variant="outlined" color="primary" auto-grow readonly/>
+
+        </v-card-text>
+      </v-card>
 
       <stop-task-button v-if="execList.length > 0" :show="execList.length > 0" :exec-id="execList[0].id"/>
+      <empty-info-card v-else content="当前没有正在运行的任务"/>
 
     </div>
   </v-card>
@@ -41,13 +35,17 @@
 <script setup lang="ts">
 
 import {usePocketBase} from "@/pocketbase";
-import {onMounted, onUnmounted, Ref, ref} from "vue";
+import {computed, onMounted, onUnmounted, Ref, ref} from "vue";
 import {RecordModel} from "pocketbase";
 import StopTaskButton from "@/views/agent/queue/components/StopTaskButton.vue";
+import EmptyInfoCard from "@/components/EmptyInfoCard.vue";
 
 const pocketbase = usePocketBase()
 const execList: Ref<RecordModel[]> = ref([])
 const logs: Ref<RecordModel[]> = ref([])
+const logString = computed(() => {
+  return logs.value.map(log => log['content']).join('')
+})
 const loading = ref(false)
 
 onMounted(async () => {
@@ -66,7 +64,7 @@ onMounted(async () => {
             })
             .then(() => {
               // TODO 新任务开始，清空旧任务日志
-              logs.value.filter(() => false)
+              logs.value = logs.value.filter(() => false)
             })
       })
   if (execList.value.length > 0) {

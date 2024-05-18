@@ -51,12 +51,7 @@
         </v-card-actions>
       </v-card>
 
-      <v-sheet v-if="crons.length ===0" style="font-size: 16px" class="d-flex align-center justify-center">
-        <v-icon :size="32" class="pr-2">
-          mdi-alert-circle-outline
-        </v-icon>
-        定时任务列表为空
-      </v-sheet>
+      <empty-info-card v-if="crons.length ===0" content="定时任务列表为空" />
 
     </div>
 
@@ -67,6 +62,7 @@ import {usePocketBase} from "@/pocketbase";
 import {Ref, ref} from "vue";
 import {RecordModel} from "pocketbase";
 import {toast} from "@/toast";
+import EmptyInfoCard from "@/components/EmptyInfoCard.vue";
 
 const pocketbase = usePocketBase()
 const loading = ref(true)

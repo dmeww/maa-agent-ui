@@ -12,13 +12,14 @@
               border>
         <v-card-text>
 
-          <v-chip-group show-arrows>
+          <v-chip-group  mandatory show-arrows variant="outlined" color="green" >
 
             <v-chip v-for="sub in task['content']['tasks']" :key="sub['type']"
                     color="green"
+                    rounded
                     class="mx-1 my-1 cursor-pointer w-auto">
               {{ TaskParamKeyMap[sub['type']] }}
-              <div >
+              <div>
                 {{ sub['params'] }}
               </div>
             </v-chip>
@@ -123,7 +124,7 @@
                       text="确定"
                       color="primary"
                       variant="flat"
-                      @click="()=>{execTask(task.id).then(()=>isActive.value = false)}"
+                      @click="()=>{execTask(task.id,task['name']).then(()=>isActive.value = false)}"
                   ></v-btn>
                 </v-card-actions>
               </v-card>
@@ -162,12 +163,7 @@
         </v-card-actions>
       </v-card>
 
-      <v-sheet v-if="tasks.length ===0" style="font-size: 16px" class="d-flex align-center justify-center">
-        <v-icon :size="32" class="pr-2">
-          mdi-alert-circle-outline
-        </v-icon>
-        任务仓库为空
-      </v-sheet>
+      <empty-info-card v-if="tasks.length ===0" content="任务仓库为空"/>
 
     </div>
 
@@ -180,6 +176,7 @@ import {RecordModel} from "pocketbase";
 import {TaskParamKeyMap} from '@/utils/tasks'
 import {toast} from "@/toast";
 import {VTimePicker} from "vuetify/labs/components";
+import EmptyInfoCard from "@/components/EmptyInfoCard.vue";
 
 
 const pocketbase = usePocketBase()
@@ -236,11 +233,12 @@ const showProfiles = async () => {
       })
 }
 
-const execTask = async (taskId: string) => {
+const execTask = async (taskId: string, taskName: string) => {
   loading.value = true
   await pocketbase?.collection('exec')
       .create({
         taskid: taskId,
+        taskname: taskName,
         profileid: selectedProfileId.value
       })
       .then(() => {

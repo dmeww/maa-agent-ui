@@ -16,7 +16,7 @@
 
         <theme-button />
 
-        <v-menu location="bottom">
+        <v-menu location="bottom" >
           <template v-slot:activator="{ props }">
             <v-btn rounded="lg"
                    icon="mdi-dots-vertical"
@@ -24,13 +24,13 @@
                    v-bind="props"
             ></v-btn>
           </template>
-
-          <v-list rounded="lg">
-            <v-list-item rounded="lg"
-                         append-icon="mdi-location-exit"
-                         title="退出登录" @click="logout"></v-list-item>
-          </v-list>
-
+          <template v-slot:default>
+            <v-list rounded="lg" variant="flat">
+              <v-list-item rounded="lg"
+                           append-icon="mdi-location-exit"
+                           title="退出登录" @click="logout"></v-list-item>
+            </v-list>
+          </template>
         </v-menu>
 
       </v-app-bar>
@@ -57,7 +57,7 @@ import ThemeButton from "@/components/ThemeButton.vue";
 const title = ref('MAA Agent')
 const drawer = ref(false)
 let pocketBase = usePocketBase()
-console.log('loginValid', pocketBase?.authStore.isValid);
+console.log(pocketBase?.health);
 
 const route = useRoute()
 
