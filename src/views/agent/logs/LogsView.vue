@@ -3,7 +3,7 @@
     <div class=" pb-5"
          :style="{width: $vuetify.display.mobile?`${$vuetify.display.width>900?844:($vuetify.display.width -56)}px`:'100%',maxWidth:'900px'}">
 
-      <log-card v-for="history in histories" :key="history.id" :model-value="history" />
+      <log-card v-for="history in histories" :key="history.id" :model-value="history" @update="loadTasks" />
 
     <empty-info-card v-if="histories.length ===0" content="任务日志记录为空" />
 

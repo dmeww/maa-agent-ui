@@ -4,12 +4,7 @@
          :style="{width: $vuetify.display.mobile?`${$vuetify.display.width>900?844:($vuetify.display.width -56)}px`:'100%',maxWidth:'900px'}">
 
 
-      <profile-card
-          v-for="profile in profiles"
-          :key="profile.id"
-          :profile="profile"
-          @update="loadProfiles"/>
-
+      <profile-card v-for="profile in profiles" :key="profile.id" :profile="profile" @update="loadProfiles"/>
 
       <empty-info-card v-if="profiles.length === 0" content="MAA预设为空"/>
 
