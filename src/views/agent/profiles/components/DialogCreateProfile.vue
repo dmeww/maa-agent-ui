@@ -4,8 +4,7 @@
       <teleport to="#app">
         <v-btn v-bind="activatorProps" color="primary"
                density="default"
-               icon="mdi-nut"
-               size="large"
+               icon="mdi-plus"
                rounded="xxl"
                style="position:absolute; bottom: 24px;right: 24px">
         </v-btn>

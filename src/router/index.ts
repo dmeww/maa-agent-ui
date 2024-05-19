@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from "vue-router";
 import DefaultLayout from "@/layout/DefaultLayout.vue";
 import EmptyLayout from "@/layout/EmptyLayout.vue";
+import {useGuard} from "@/router/guard";
 
 const routes: RouteRecordRaw[] = [
 
@@ -15,7 +16,7 @@ const routes: RouteRecordRaw[] = [
                 meta: {
                     title: '任务配置'
                 },
-                component: () => import('@/views/maa/autoclick/AutoClickView.vue')
+                component: () => import('@/views/maa/autoclick/AutoTaskPanel.vue')
             },
             {
                 path: 'queue',
@@ -74,6 +75,11 @@ const routes: RouteRecordRaw[] = [
                 component: () => import('@/views/auth/AuthView.vue')
             }
         ]
+    },
+    {
+        path: '/404',
+        name: '404',
+        component: () => import('@/views/error/404.vue')
     }
 
 ]
@@ -84,6 +90,8 @@ const router = createRouter({
     routes: routes
 })
 
+
+useGuard(router)
 
 export default router
 
