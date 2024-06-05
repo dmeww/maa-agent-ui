@@ -8,11 +8,18 @@
       <v-list-item rounded="xl" title="任务配置" @click="go('/')">
         <template v-slot:prepend>
           <v-icon color="primary">
-            mdi-google-assistant
+            mdi-apps
           </v-icon>
         </template>
       </v-list-item>
       <v-list-subheader color="primary">Agent</v-list-subheader>
+      <v-list-item rounded="xl" title="活跃状态" @click="go('/heartbeat')">
+        <template v-slot:prepend>
+          <v-icon color="primary">
+            mdi-atom
+          </v-icon>
+        </template>
+      </v-list-item>
       <v-list-item rounded="xl" title="任务仓库" @click="go('/tasks')">
         <template v-slot:prepend>
           <v-icon color="primary">

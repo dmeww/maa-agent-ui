@@ -4,7 +4,6 @@ import EmptyLayout from "@/layout/EmptyLayout.vue";
 import {useGuard} from "@/router/guard";
 
 const routes: RouteRecordRaw[] = [
-
     {
         path: '/',
         name: 'index',
@@ -58,7 +57,14 @@ const routes: RouteRecordRaw[] = [
                 },
                 component: () => import('@/views/agent/logs/LogsView.vue')
             },
-
+            {
+                path: 'heartbeat',
+                name: 'heartbeat',
+                meta: {
+                    title: '活跃状态'
+                },
+                component: () => import('@/views/agent/heartbeat/HeartBeatView.vue')
+            },
         ]
     },
     {
